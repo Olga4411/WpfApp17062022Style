@@ -1,0 +1,111 @@
+﻿<Window x:Class="WpfApp17062022Style.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp17062022Style"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <!--<StackPanel Name="StackPanel1" HorizontalAlignment="Left">
+        <StackPanel.Resources>
+            <LinearGradientBrush x:Key ="GradientBrushForButton" StartPoint="0,0" EndPoint="1,0">
+                <GradientStop Color="GreenYellow" Offset="0.0" />
+                <GradientStop Color="LightGreen" Offset="0.5" />
+                <GradientStop Color="Green" Offset="1.0" />
+            </LinearGradientBrush>
+        </StackPanel.Resources>
+        <Label Height="28" Name="label1" Width="150">Надпись до кнопки № 1</Label>
+        <Button Height="23" Name="button1" Width="75" Background="{DynamicResource GradientBrushForButton}">Кнопка 1</Button>
+        <Label Height="28" Name="label2" Width="170">Надпись между кнопками</Label>
+        <Button Height="23" Name="button2" Width="75" Background="{StaticResource GradientBrushForButton}">Кнопка 2</Button>
+        <Label Height="28" Name="label3" Width="170">Надпись после кнопки №2</Label>
+    </StackPanel>-->
+
+    <!--2 изменение label -->
+    <!--<StackPanel Name="StackPanel1" HorizontalAlignment="Left">
+        <StackPanel.Resources>
+            <LinearGradientBrush x:Key ="GradientBrushForButton" StartPoint="0,0" EndPoint="1,0">
+                <GradientStop Color="GreenYellow" Offset="0.0" />
+                <GradientStop Color="LightGreen" Offset="0.5" />
+                <GradientStop Color="Green" Offset="1.0" />
+            </LinearGradientBrush>
+            <FontStyle x:Key="LFS">Italic</FontStyle>
+            <FontFamily x:Key="LFF">Arial</FontFamily>
+        </StackPanel.Resources>
+        <Label Height="28" Name="label1" Width="150" FontFamily="{StaticResource LFF}" FontStyle="{StaticResource LFS}">Надпись до кнопки № 1</Label>
+        <Button Height="23" Name="button1" Width="75" Background="{DynamicResource GradientBrushForButton}">Кнопка 1</Button>
+        <Label Height="28" Name="label2" Width="170" FontFamily="{StaticResource LFF}" FontStyle="{StaticResource LFS}" >Надпись между кнопками</Label>
+        <Button Height="23" Name="button2" Width="75" Background="{StaticResource GradientBrushForButton}">Кнопка 2</Button>
+        <Label Height="28" Name="label3" Width="170" FontFamily="{StaticResource LFF}" FontStyle="{StaticResource LFS}" >Надпись после кнопки №2</Label>
+    </StackPanel>-->
+
+    <!--3 -->
+    <!--<StackPanel Name="StackPanel1" HorizontalAlignment="Left">
+        <StackPanel.Resources>
+            <LinearGradientBrush x:Key ="GradientBrushForButton" StartPoint="0,0" EndPoint="1,0">
+                <GradientStop Color="GreenYellow" Offset="0.0" />
+                <GradientStop Color="LightGreen" Offset="0.5" />
+                <GradientStop Color="Green" Offset="1.0" />
+            </LinearGradientBrush>
+            --><!-- для кото targettype--><!--
+            <Style TargetType="Label">
+                --><!-- устанавливаем свойства значение, это свойство для каждой --><!--
+                <Setter Property="FontStyle" Value="Italic"/>
+                <Setter Property="FontFamily" Value="Times New Roman"/>
+            </Style>
+            --><!-- для отдельной label другое--><!--
+            <Style TargetType="Label" x:Key="LABST">
+                <Setter Property="FontFamily" Value="Bold"/>
+                <Setter Property="FontFamily" Value="Arial"/>
+            </Style>
+            <Style TargetType="Label" x:Key="LabSize" BasedOn="{StaticResource LABST}">
+                <Setter Property="FontSize" Value="22"/>
+                
+            </Style>
+            
+        </StackPanel.Resources>
+        --><!-- привязываем ресурс label--><!--
+        <Label Height="28" Name="label1" Width="150" Style="{StaticResource LABST}" >Надпись до кнопки № 1</Label>
+        <Button Height="23" Name="button1" Width="75" Background="{DynamicResource GradientBrushForButton}">Кнопка 1</Button>
+        <Label Height="28" Name="label2" Width="170"  >Надпись между кнопками</Label>
+        <Button Height="23" Name="button2" Width="75" Background="{StaticResource GradientBrushForButton}">Кнопка 2</Button>
+        <Label Height="28" Name="label3" Width="170" Style="{StaticResource LabSize}" >Надпись после кнопки №2</Label>
+    </StackPanel>-->
+    
+    <!--Шаблоны-->
+    <!-- создание шаблона-->
+    <!--<Window.Resources>
+        <ControlTemplate x:Key="BtTmp" TargetType="{x:Type Button}">
+            <Grid>
+                <Ellipse Height="45" Width="200" Stroke="Black" Fill="Aquamarine"/>
+                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Grid>
+        </ControlTemplate>
+    </Window.Resources>
+    <StackPanel>
+        <Button Name="bt_1" Margin="5" Template="{StaticResource BtTmp}"></Button>
+        <Button Name="bt_2" Margin="5" Template="{StaticResource BtTmp}"></Button>
+    </StackPanel>-->
+
+    <!-- расширение разметки templatebinding-->
+    <Window.Resources>
+        <ControlTemplate x:Key="BtTmp" TargetType="{x:Type Button}">
+            <Grid>
+                <!-- привязка templatebinding-->
+                <Ellipse Height="45" Width="200" Stroke="{TemplateBinding Background}" Fill="{TemplateBinding Background}"/>
+                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Grid>
+        </ControlTemplate>
+        <!-- создаем свой собственный стиль-->
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Template" Value="{StaticResource BtTmp }"/>
+            <Setter Property="Background" Value="LightBlue"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+        </Style>
+    </Window.Resources>
+    <StackPanel>
+        <!-- для первой кнопки делаем другое, вторая остается-->
+        <Button Name="bt_1" Margin="5" Background="Red" BorderBrush="Black" >Button</Button>
+        <Button Name="bt_2" Margin="5" >Button</Button>
+    </StackPanel>
+</Window>
